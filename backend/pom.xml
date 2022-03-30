@@ -10,7 +10,7 @@
     <artifactId>capstone-mastermind-backend</artifactId>
     <version>0.0.1-SNAPSHOT</version>
     <name>capstone-mastermind-backend</name>
-    <description>Demo to deploy frontend and backend</description>
+    <description>Capstone Mastermind Game</description>
     <dependencies>
         <dependency>
             <groupId>org.springframework.boot</groupId>
