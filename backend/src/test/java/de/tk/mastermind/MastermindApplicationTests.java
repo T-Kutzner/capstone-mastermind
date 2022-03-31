@@ -1,10 +1,9 @@
-package com.example.demo;
+package de.tk.mastermind;
 
-import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
 @SpringBootTest
-class DemoApplicationTests {
+class MastermindApplicationTests {
 
 	/*
 	@Test
