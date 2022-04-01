@@ -19,12 +19,12 @@ public class PlayerController {
         return playerService.createPlayer(player);
     }
 
-    @GetMapping
-    public Player findById() {
-        return playerService.findPlayerById(findById().getId());
+    @GetMapping("/{id}")
+    public Player findById(@PathVariable String id) {
+        return playerService.findPlayerById(id);
     }
 
-    @DeleteMapping("/player")
+    @DeleteMapping("/{id}")
     public Player deletePlayerById(@PathVariable String id) {
         return playerService.deletePlayerById(id);
     }

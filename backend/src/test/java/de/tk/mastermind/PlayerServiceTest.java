@@ -33,11 +33,6 @@ public class PlayerServiceTest {
 
         // THEN
         Assertions.assertEquals(testPlayer, actual);
-
-
-
-
-        verify(playerRepoMock).save(testPlayer);
     }
 
     @Test
