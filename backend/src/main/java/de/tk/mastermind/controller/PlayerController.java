@@ -18,7 +18,6 @@ import java.util.Optional;
 public class PlayerController {
 
     private final PlayerService playerService;
-    private final PasswordEncoder passwordEncoder;
 
     @PostMapping
     public Player createPlayer(@RequestBody RegistrationData registrationData) {
@@ -26,7 +25,6 @@ public class PlayerController {
         if(!registrationData.getPassword().equals(registrationData.getPasswordAgain())) {
             throw new IllegalArgumentException("Die Passwörter stimmen nicht überein.");
         }
-        registrationData.setPassword(passwordEncoder.encode(registrationData.getPassword()));
         return playerService.savePlayer(registrationData);
     }
 

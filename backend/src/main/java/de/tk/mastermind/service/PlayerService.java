@@ -6,6 +6,7 @@ import de.tk.mastermind.repositories.PlayerRepository;
 
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,6 +16,7 @@ import java.util.Optional;
 public class PlayerService {
 
     private final PlayerRepository playerRepository;
+    private final PasswordEncoder passwordEncoder;
 
     public Player savePlayer(RegistrationData registrationData) {
 
@@ -24,7 +26,7 @@ public class PlayerService {
 
         Player player = new Player();
         player.setPlayername(registrationData.getPlayername());
-        player.setPassword(registrationData.getPassword());
+        player.setPassword(passwordEncoder.encode(registrationData.getPassword()));
 
         return playerRepository.save(player);
     }
