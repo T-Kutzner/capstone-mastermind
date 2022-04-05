@@ -1,8 +1,11 @@
 package de.tk.mastermind.service;
 
+import de.tk.mastermind.models.RegistrationData;
 import de.tk.mastermind.models.Player;
 import de.tk.mastermind.repositories.PlayerRepository;
+
 import lombok.RequiredArgsConstructor;
+
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -13,12 +16,25 @@ public class PlayerService {
 
     private final PlayerRepository playerRepository;
 
-    public Player createPlayer(Player player) {
+    public Player savePlayer(RegistrationData registrationData) {
+
+        if(findByPlayerName(registrationData.getPlayername()).isPresent()) {
+            throw new IllegalArgumentException("Der Nutzername ist schon vergeben.");
+        }
+
+        Player player = new Player();
+        player.setPlayername(registrationData.getPlayername());
+        player.setPassword(registrationData.getPassword());
+
         return playerRepository.save(player);
     }
 
-    public Player findPlayerById(String id) {
-        return playerRepository.findById(id).orElseThrow(() -> new IllegalArgumentException("Keine passende ID gefunden."));
+    public Optional<Player> findByPlayerName(String playername) {
+        return playerRepository.findByPlayername(playername);
+    }
+
+    public Optional<Player> findPlayerById(String id) {
+        return playerRepository.findById(id);
     }
 
     public Player deletePlayerById(String idToDelete) {

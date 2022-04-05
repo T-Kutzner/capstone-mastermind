@@ -11,7 +11,6 @@ public class Player {
 
     @Id
     private String id;
-    private String playerName;
+    private String playername;
     private String password;
-
 }

@@ -1,10 +1,15 @@
 package de.tk.mastermind.controller;
 
+import de.tk.mastermind.models.RegistrationData;
 import de.tk.mastermind.models.Player;
 import de.tk.mastermind.service.PlayerService;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
+import java.util.Optional;
 
 @RestController
 @CrossOrigin
@@ -13,19 +18,30 @@ import org.springframework.web.bind.annotation.*;
 public class PlayerController {
 
     private final PlayerService playerService;
+    private final PasswordEncoder passwordEncoder;
 
     @PostMapping
-    public Player createPlayer(@RequestBody Player player) {
-        return playerService.createPlayer(player);
+    public Player createPlayer(@RequestBody RegistrationData registrationData) {
+
+        if(!registrationData.getPassword().equals(registrationData.getPasswordAgain())) {
+            throw new IllegalArgumentException("Die Passwörter stimmen nicht überein.");
+        }
+        registrationData.setPassword(passwordEncoder.encode(registrationData.getPassword()));
+        return playerService.savePlayer(registrationData);
     }
 
     @GetMapping("/{id}")
-    public Player findById(@PathVariable String id) {
+    public Optional<Player> findById(@PathVariable String id) {
         return playerService.findPlayerById(id);
     }
 
     @DeleteMapping("/{id}")
     public Player deletePlayerById(@PathVariable String id) {
         return playerService.deletePlayerById(id);
+    }
+
+    @GetMapping
+    public String greet(Principal principal) {
+        return "Hallo " + principal.getName() + "!";
     }
 }

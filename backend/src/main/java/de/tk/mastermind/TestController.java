@@ -17,5 +17,4 @@ public class TestController {
         Random rand = new Random();
         return greetings.get(rand.nextInt(greetings.size()));
     }
-
 }
