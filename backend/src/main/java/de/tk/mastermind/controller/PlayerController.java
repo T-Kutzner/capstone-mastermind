@@ -5,6 +5,7 @@ import de.tk.mastermind.models.Player;
 import de.tk.mastermind.service.PlayerService;
 import lombok.RequiredArgsConstructor;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 
@@ -29,8 +30,8 @@ public class PlayerController {
     }
 
     @GetMapping("/{id}")
-    public Optional<Player> findById(@PathVariable String id) {
-        return playerService.findPlayerById(id);
+    public ResponseEntity<Player> findById(@PathVariable String id) {
+        return ResponseEntity.of(playerService.findPlayerById(id));
     }
 
     @DeleteMapping("/{id}")
