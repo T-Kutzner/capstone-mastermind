@@ -15,7 +15,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/auth/login")
+@RequestMapping("/api/login")
 public class LoginController {
 
     private final AuthenticationManager authenticationManager;
@@ -36,7 +36,7 @@ public class LoginController {
             return jwtService.createToken(claims, loginData.getPlayername());
         }
         catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ungültige Registrierungsdaten");
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Ungültige Logindaten");
         }
     }
 }
