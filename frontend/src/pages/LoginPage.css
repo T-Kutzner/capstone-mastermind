@@ -1,4 +1,13 @@
 .loginPage{
-    display: grid;
+    display: flex;
     justify-content: center;
+}
+
+.inputLogin{
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 15rem;
+    margin: auto;
+    gap: 12px;
 }
