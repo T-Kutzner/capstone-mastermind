@@ -1,24 +1,26 @@
-import React, { useState, useEffect } from 'react';
+import React from 'react';
+import "./App.css"
+import { BrowserRouter, Routes, Route } from 'react-router-dom';
+
+import  LoginPage from './pages/LoginPage';
+import  RegisterPage from './pages/RegisterPage';
+import GamePage from "./pages/GamePage";
 
 function App() {
 
-    const [greeting, setGreeting] = useState('')
-
-    useEffect(() => {
-        fetch('/api/greeting', {
-            method: 'GET',
-            headers: {
-                'Accept': 'text/plain'
-            }
-        })
-            .then(response => response.text())
-            .then(text => setGreeting(text))
-            .catch(err => setGreeting('Da ist etwas schief gelaufen'));
-    }, []);
 
     return (
-        <div>
-            {greeting}
+        <div className="App">
+            <h1 id={'master'}>Mastermind</h1>
+            <BrowserRouter>
+                <Routes>
+                    <Route path='/login' element={<LoginPage />} />
+                    <Route path="/register" element={<RegisterPage />} />
+                    <Route path="/game" element={<GamePage />} />
+                    <Route path="/logout" />
+                    <Route path="/*" element={<App />} />
+                </Routes>
+            </BrowserRouter>
         </div>
     );
 }
