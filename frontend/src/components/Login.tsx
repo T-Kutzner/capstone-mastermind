@@ -48,13 +48,13 @@ export const Login = () => {
 
         <div className={'login'}>
             <div className={'loginError'}>{errorMessage}</div>
-            <div>
-            <input type={"text"} placeholder={"Spielername"} value={loginPlayername} onChange={ev => setLoginPlayername(ev.target.value)} /><br />
-            <input type={"password"} placeholder={"Passwort"} value={loginPlayerPassword} onChange={ev => setLoginPlayerPassword(ev.target.value)} /><br />
-            <button onClick={login}>Anmelden</button>
+            <div className={'inputLogin'}>
+                <input type={"text"} placeholder={"Spielername"} value={loginPlayername} onChange={ev => setLoginPlayername(ev.target.value)} />
+                <input type={"password"} placeholder={"Passwort"} value={loginPlayerPassword} onChange={ev => setLoginPlayerPassword(ev.target.value)} />
+                <button onClick={login}>Anmelden</button>
             </div><br />
             <div>
-                <label>Noch nicht registriert? Dann hier entlang ➞ </label>
+                <label>Noch nicht registriert? <br/> Dann hier entlang &#8658; </label>
                 <button onClick={toRegistration}>Registrierung</button>
             </div>
         </div>

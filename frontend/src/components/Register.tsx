@@ -54,17 +54,17 @@ export const Register = () => {
 
         <div className={'register'}>
             <div className={'registerError'}>{errorMessage}</div>
-            <div>
-            <input type={"text"} placeholder={"Spielername"} value={registerPlayername}
-                   onChange={ev => setRegisterPlayername(ev.target.value)}/><br/>
-            <input type={"password"} placeholder={"Passwort"} value={registerPlayerPassword}
-                   onChange={ev => setRegisterPlayerPassword(ev.target.value)}/><br/>
-            <input type={"password"} placeholder={"Passwort wiederholen"} value={registerPlayerPasswordAgain}
-                   onChange={ev => setRegisterPlayerPasswordAgain(ev.target.value)}/><br/>
-            <button onClick={register}>Registrieren</button>
+            <div className={'inputRegister'}>
+                <input type={"text"} placeholder={"Spielername"} value={registerPlayername}
+                       onChange={ev => setRegisterPlayername(ev.target.value)}/>
+                <input type={"password"} placeholder={"Passwort"} value={registerPlayerPassword}
+                       onChange={ev => setRegisterPlayerPassword(ev.target.value)}/>
+                <input type={"password"} placeholder={"Passwort wiederholen"} value={registerPlayerPasswordAgain}
+                       onChange={ev => setRegisterPlayerPasswordAgain(ev.target.value)}/>
+                <button onClick={register}>Registrieren</button>
             </div><br/>
             <div>
-                <label>Doch schon registriert? Dann hier wieder zurück ➞ </label>
+                <label>Doch schon registriert? <br /> Dann hier wieder zurück &#8658; </label>
                 <button onClick={toLogin}>Einloggen</button>
             </div>
         </div>

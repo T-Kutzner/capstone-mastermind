@@ -1,13 +1,9 @@
-.registerPage{
-    display: grid;
-    justify-content: center;
-}
-
-.inputRegister{
+.notfound{
     display: flex;
     justify-content: center;
     flex-direction: column;
-    width: 15rem;
+    width: 20rem;
     margin: auto;
     gap: 12px;
+    align-items: center;
 }
