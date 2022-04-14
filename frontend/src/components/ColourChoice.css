@@ -1,0 +1,10 @@
+.colourChoiceButtons{
+    display: flex;
+    justify-content: space-between;
+    justify-items: auto;
+    flex-direction: column;
+    width: 25px;
+    height: 25px;
+    margin: auto;
+    gap: 5px;
+}
