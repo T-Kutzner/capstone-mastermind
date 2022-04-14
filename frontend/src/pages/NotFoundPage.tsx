@@ -1,4 +1,4 @@
-import {useNavigate} from "react-router-dom";
+import {Link, useNavigate} from "react-router-dom";
 
 import "./NotFoundPage.css";
 
@@ -14,9 +14,11 @@ export default function NotFoundPage() {
 
     return (
         <div className={'notfound'}>
-            <label>404</label>
+            <label className={'page404'}>404</label>
             <label>Verlaufen? Diese Seite existiert nicht.</label>
-            <button onClick={toLogin}>Zur Anmeldung</button>
+            <Link to="/login" className="button404">
+                <h1 className="press_start">Zur Anmeldung</h1>
+            </Link>
         </div>
     )
 }
