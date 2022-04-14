@@ -1,16 +1,9 @@
-import {Link, useNavigate} from "react-router-dom";
+import {Link} from "react-router-dom";
 
 import "./NotFoundPage.css";
 
 
 export default function NotFoundPage() {
-
-    const navigate = useNavigate()
-
-    const toLogin = () => {
-        navigate("/login")
-    }
-
 
     return (
         <div className={'notfound'}>
