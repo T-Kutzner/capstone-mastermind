@@ -10,14 +10,15 @@ export const ColourChoice = () => {
 
     return (
         <div>
-            <div className={'colourChoiceButtons'}>
-                <button style={{ backgroundColor: ColoursForChoice[colourIndex[0]]}} onClick={inProgress}>0</button>
-                <button style={{ backgroundColor: ColoursForChoice[colourIndex[1]]}} onClick={inProgress}>1</button>
-                <button style={{ backgroundColor: ColoursForChoice[colourIndex[2]]}} onClick={inProgress}>2</button>
-                <button style={{ backgroundColor: ColoursForChoice[colourIndex[3]]}} onClick={inProgress}>3</button>
-                <button style={{ backgroundColor: ColoursForChoice[colourIndex[4]]}} onClick={inProgress}>4</button>
-                <button style={{ backgroundColor: ColoursForChoice[colourIndex[5]]}} onClick={inProgress}>5</button>
-            </div>
+            <fieldset  className={'colourChoiceButtons'}>
+                <legend>Farbauswahl</legend>
+                <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[0]]}} onClick={inProgress}></button>
+                <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[1]]}} onClick={inProgress}></button>
+                <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[2]]}} onClick={inProgress}></button>
+                <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[3]]}} onClick={inProgress}></button>
+                <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[4]]}} onClick={inProgress}></button>
+                <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[5]]}} onClick={inProgress}></button>
+            </fieldset>
             <div>
                 <button>Neues Spiel</button>
             </div>
