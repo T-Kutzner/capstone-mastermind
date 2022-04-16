@@ -11,7 +11,7 @@ export const SolutionColours = () => {
 
     function getFourRandomNumbersOutOfSix(){
 
-        let colourIndexTemp : number[] = new Array()
+        let colourIndexTemp : number[] = []
         let random : number;
 
         while(colourIndexTemp.length < 4) {
