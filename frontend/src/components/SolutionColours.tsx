@@ -26,17 +26,11 @@ export const SolutionColours = () => {
     function tbd(){}
 
     return (
-        <div>
-            <fieldset className={'solutionColourButtons'}>
-                <legend>Lösung</legend>
-                <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[0]]}} onClick={tbd}></button>
-                <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[1]]}} onClick={tbd}></button>
-                <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[2]]}} onClick={tbd}></button>
-                <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[3]]}} onClick={tbd}></button>
-            </fieldset>
-            <div>
-                <button onClick={() => {getFourRandomNumbersOutOfSix()}}>Lösung</button>
-            </div>
+        <div className={'solutionColourButtons'}>
+            <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[0]]}} onClick={tbd}></button>
+            <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[1]]}} onClick={tbd}></button>
+            <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[2]]}} onClick={tbd}></button>
+            <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[3]]}} onClick={tbd}></button>
         </div>
     )
 }
