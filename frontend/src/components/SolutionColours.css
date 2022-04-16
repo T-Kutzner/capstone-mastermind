@@ -1,0 +1,18 @@
+.solutionColourButtons{
+    display: flex;
+    justify-content: space-between;
+    justify-items: auto;
+    flex-direction: row;
+    width: 25px;
+    height: 60px;
+    margin-left: 600px;
+    margin-top: -400px;
+    border: black inset 2px;
+}
+
+.gameButtons{
+    min-width: 35px;
+    min-height: 35px;
+    border: 2px solid;
+    margin-inline: 10px;
+}
