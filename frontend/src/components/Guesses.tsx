@@ -1,21 +1,19 @@
 import { ColoursForChoice } from '../models/ColoursForChoice'
-import "./ColourChoice.css"
-
-export const ColourChoice = () => {
+import "./Guesses.css"
 
 
-    let colourIndex : number[] = [0, 1, 2, 3, 4, 5]
+export const Guesses = () => {
+
+    let colourIndex : number[] = []
 
     function inProgress(){}
 
     return (
-        <div className={'colourChoiceButtons'}>
+        <div className={'guessColourButtons'}>
             <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[0]]}} onClick={inProgress}></button>
             <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[1]]}} onClick={inProgress}></button>
             <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[2]]}} onClick={inProgress}></button>
             <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[3]]}} onClick={inProgress}></button>
-            <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[4]]}} onClick={inProgress}></button>
-            <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[5]]}} onClick={inProgress}></button>
         </div>
     )
 }

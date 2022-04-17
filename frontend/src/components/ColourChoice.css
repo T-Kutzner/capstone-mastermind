@@ -1,13 +1,7 @@
 .colourChoiceButtons{
     display: flex;
-    padding: 15px;
-    justify-content: space-between;
     flex-direction: column;
-    margin-left: 220px;
-    margin-top: 120px;
     gap: 15px;
-    border: black inset 2px;
-    width: 50px;
 }
 
 .gameButtons{
