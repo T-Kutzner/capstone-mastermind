@@ -10,8 +10,11 @@ export interface Guess {
 
 export enum Colour {
     RED,
-    GREEN,
+    PETROL,
     ORANGE,
+    GREEN,
+    YELLOW,
     PURPLE,
-    YELLOW
+    GREY,
+    MINT
 }

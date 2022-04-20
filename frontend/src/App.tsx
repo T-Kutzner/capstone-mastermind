@@ -1,11 +1,11 @@
 import React from 'react';
 import "./App.css"
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
-
 import  LoginPage from './pages/LoginPage';
 import  RegisterPage from './pages/RegisterPage';
 import GamePage from './pages/GamePage';
 import NotFoundPage from './pages/NotFoundPage';
+
 
 function App() {
 

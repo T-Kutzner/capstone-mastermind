@@ -25,5 +25,4 @@ public class Game {
         return !guesses.isEmpty() && guesses.get(guesses.size()-1).equals(solution);
     }
 
-
 }

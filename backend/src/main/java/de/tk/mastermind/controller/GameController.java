@@ -5,6 +5,7 @@ import de.tk.mastermind.models.Guess;
 import de.tk.mastermind.service.GameService;
 
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
@@ -20,29 +21,14 @@ public class GameController {
         return gameService.createGame();
     }
 
-/*
     @PostMapping("/{id}/guesses")
-    public Game createGuess(@PathVariable String id, @RequestBody Guess guess){
-        return gameService.createGuess(id, guess);
+    public ResponseEntity<Game> createGuess(@PathVariable String id, @RequestBody Guess guess){
+        return ResponseEntity.of(gameService.createGuess(id, guess));
     }
 
-   // @GetMapping("/{id}")
-
-
-
- */
 
 
 /*
-    @PostMapping
-    public Player createPlayer(@RequestBody RegistrationData registrationData) {
-
-        if(!registrationData.getPassword().equals(registrationData.getPasswordAgain())) {
-            throw new IllegalArgumentException("Die Passwörter stimmen nicht überein.");
-        }
-        return playerService.savePlayer(registrationData);
-    }
-
     @GetMapping("/{id}")
     public ResponseEntity<Player> findById(@PathVariable String id) {
         return ResponseEntity.of(playerService.findPlayerById(id));
@@ -57,6 +43,5 @@ public class GameController {
     public String greet(Principal principal) {
         return "Hallo " + principal.getName() + "!";
     }
-
  */
 }

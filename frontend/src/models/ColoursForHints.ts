@@ -1,4 +1,4 @@
-export const ColoursForHints:{[key: number]: any} = {
-    0: '#000000',
-    1: '#FFFFFF'
+export const ColoursForHints:{[key: string]: any} = {
+    'BLACK': '#000000',
+    'WHITE': '#FFFFFF'
 }

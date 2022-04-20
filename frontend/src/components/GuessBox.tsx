@@ -2,9 +2,11 @@ import { ColoursForChoice } from '../models/ColoursForChoice'
 import "./GuessBox.css"
 import {Guess} from "../models/Game";
 
+
 interface GuessBoxProps {
     guess: Guess
 }
+
 
 export const GuessBox = (props: GuessBoxProps) => {
 

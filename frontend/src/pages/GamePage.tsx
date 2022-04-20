@@ -5,7 +5,7 @@ import {GuessBox} from "../components/GuessBox";
 import "./GamePage.css"
 import {HintBox} from "../components/HintBox";
 import {AboutGame} from "../components/AboutGame";
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import Game from "../models/Game";
 
 
@@ -15,7 +15,6 @@ export default function GamePage(){
 
     const [game, setGame] = useState({} as Game);
 
-    const [guessColour, setGuessColour] = useState('#868EBA')
 
     const startGame = () => {
         fetch(`${process.env.REACT_APP_BASE_URL}/api/game`, {
@@ -28,7 +27,24 @@ export default function GamePage(){
             .then((game: Game) => setGame(game));
     };
 
-    function checkGuess(){
+    const checkGuess = () => {
+        fetch(`${process.env.REACT_APP_BASE_URL}/api/game/${game.id}/guesses`, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token') ?? 'no-token'}`
+            },
+            body:
+        })
+            .then(response => response.json())
+
+
+
+
+
+
+
+            .then(guess: Guess) => setGuess(guess));
+    };
 // hier Arrays testen und Hints in Reihenfolge setzen
         //for(let i = 0; i < 4; i++){
         //if(solutionArray.includes(guessArray[i]){
@@ -39,7 +55,8 @@ export default function GamePage(){
         //}}
 
 
-    }  // dann noch prüfen ob alle guesses schwarz sind
+
+    // dann noch prüfen ob alle guesses schwarz sind
     // wenn ja, gewonnen (Solution einblenden und yay, gewonnen)
     // wenn nein, Zähler für Versuch überprüfen ob schon auf max Versuche
     // wenn max dann verloren und Solution einblenden
@@ -67,20 +84,17 @@ export default function GamePage(){
 
             {game.id &&
                 <div>
-                    <fieldset disabled className={'boxes'}>
+                    <fieldset className={'boxes'}>
                         <legend>Lösung</legend>
                         <Solution solution={game.solution} />
                     </fieldset>
 
                     <div className={'answer'}>
                         <fieldset className={"guessBox"}>
-                            <legend>06. Versuch</legend>
-                            Hier müssen die editierbaren Boxen hin
+                            <legend>aktueller Versuch</legend>
+                            <GuessBox guess={guess} />
                         </fieldset>
-                        <div className={'hintBox'}>
-                            <HintBox />
-                        </div>
-
+                        <button onClick={checkGuess}>prüfen</button>
                     </div>
 
                     {game.guesses.map(guess =>
@@ -110,7 +124,7 @@ export default function GamePage(){
                 <button>Konto löschen</button>
                 <button onClick={AboutGame}>Spielregeln</button>
                 <button onClick={() => startGame()}>Neues Spiel</button>
-                <button onClick={checkGuess}>prüfen</button>
+
             </div>
         </div>
     )

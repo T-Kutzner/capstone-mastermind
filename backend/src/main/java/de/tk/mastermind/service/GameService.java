@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
 
+
 @Service
 @RequiredArgsConstructor
 public class GameService {
@@ -45,19 +46,17 @@ public class GameService {
     }
 
 
-
-    public Game createGuess(String id, Guess guess) {
+    public Optional <Game> createGuess(String id, Guess guess) {
 
         Optional<Game> newGame = gameRepository.findById(id);
-        Game game = newGame.get();
-        List<Guess> guessList = game.getGuesses();
-        guessList.add(guess);
-        game.setGuesses(guessList);
+        if (newGame.isPresent()) {
+            Game game = newGame.get();
 
-        return  gameRepository.save(game);
+            List<Guess> guessList = game.getGuesses();
+            guessList.add(guess);
+
+            return Optional.of(gameRepository.save(game));
+        }
+        return Optional.empty();
     }
-
-
-
-
 }
