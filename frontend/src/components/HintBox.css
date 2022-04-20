@@ -1,0 +1,17 @@
+.colourHintButtons{
+    display: flex;
+    flex-direction: column;
+}
+
+.colourHintButtonsDirection{
+    display: flex;
+    flex-direction: row;
+}
+
+.gameHintButtons{
+    min-width: 16px;
+    min-height: 16px;
+    border: 1px solid;
+    margin: 2px;
+    background-color: #868EBA
+}

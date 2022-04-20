@@ -1,19 +1,56 @@
 import {useNavigate} from "react-router-dom";
 import {ColourChoice} from "../components/ColourChoice";
-import {SolutionColours} from "../components/SolutionColours"
-import {Guesses} from "../components/Guesses";
+import {Solution} from "../components/Solution"
+import {GuessBox} from "../components/GuessBox";
 import "./GamePage.css"
+import {HintBox} from "../components/HintBox";
+import {AboutGame} from "../components/AboutGame";
+import {useEffect, useState} from "react";
+import Game from "../models/Game";
 
 
 export default function GamePage(){
 
     const navigate = useNavigate()
 
+    const [game, setGame] = useState({} as Game);
+
+    const [guessColour, setGuessColour] = useState('#868EBA')
+
+    const startGame = () => {
+        fetch(`${process.env.REACT_APP_BASE_URL}/api/game`, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token') ?? 'no-token'}`
+            }
+        })
+            .then(response => response.json())
+            .then((game: Game) => setGame(game));
+    };
+
+    function checkGuess(){
+// hier Arrays testen und Hints in Reihenfolge setzen
+        //for(let i = 0; i < 4; i++){
+        //if(solutionArray.includes(guessArray[i]){
+        //  if(guessArray[i]) == solutionArray[i]{
+        //      set hintArray[i] == ColoursForHints[0]
+        //      }
+        //  else set hintArray[i] == ColoursForHints[1]
+        //}}
+
+
+    }  // dann noch prüfen ob alle guesses schwarz sind
+    // wenn ja, gewonnen (Solution einblenden und yay, gewonnen)
+    // wenn nein, Zähler für Versuch überprüfen ob schon auf max Versuche
+    // wenn max dann verloren und Solution einblenden
+    // wenn noch nicht max Versuche dann nächsten Versuch freigeben, Zähler für Versuch hochzählen(?)
+
+    //Spielregelbox: collapse? textbox
+
+
 
     return(
         <div className={'gamePage'}>
-
-
 
 
 
@@ -24,83 +61,57 @@ export default function GamePage(){
                 </fieldset>
             </div>
 
-            <div>
-                <fieldset className={'boxes'}>
-                    <legend>Lösung</legend>
-                    <SolutionColours />
-                </fieldset>
 
 
-                <fieldset className={'guessBox'}>
-                    <legend>12. Versuch</legend>
-                    <Guesses />
-                </fieldset>
 
-                <fieldset className={"guessBox"}>
-                    <legend>11. Versuch</legend>
-                    <Guesses />
-                </fieldset>
 
-                <fieldset className={"guessBox"}>
-                    <legend>10. Versuch</legend>
-                    <Guesses />
-                </fieldset>
+            {game.id &&
+                <div>
+                    <fieldset disabled className={'boxes'}>
+                        <legend>Lösung</legend>
+                        <Solution solution={game.solution} />
+                    </fieldset>
 
-                <fieldset className={"guessBox"}>
-                    <legend>09. Versuch</legend>
-                    <Guesses />
-                </fieldset>
+                    <div className={'answer'}>
+                        <fieldset className={"guessBox"}>
+                            <legend>06. Versuch</legend>
+                            Hier müssen die editierbaren Boxen hin
+                        </fieldset>
+                        <div className={'hintBox'}>
+                            <HintBox />
+                        </div>
 
-                <fieldset className={"guessBox"}>
-                    <legend>08. Versuch</legend>
-                    <Guesses />
-                </fieldset>
+                    </div>
 
-                <fieldset className={"guessBox"}>
-                    <legend>07. Versuch</legend>
-                    <Guesses />
-                </fieldset>
+                    {game.guesses.map(guess =>
+                        <div className={'answer'}>
+                            <fieldset className={"guessBox"}>
+                                <legend>06. Versuch</legend>
+                                <GuessBox guess={guess} />
+                            </fieldset>
+                            <div className={'hintBox'}>
+                                <HintBox />
+                            </div>
+                        </div>
+                    )}
+                </div>
+            }
 
-                <fieldset className={"guessBox"}>
-                    <legend>06. Versuch</legend>
-                    <Guesses />
-                </fieldset>
 
-                <fieldset className={"guessBox"}>
-                    <legend>05. Versuch</legend>
-                    <Guesses />
-                </fieldset>
 
-                <fieldset className={"guessBox"}>
-                    <legend>04. Versuch</legend>
-                    <Guesses />
-                </fieldset>
 
-                <fieldset className={"guessBox"}>
-                    <legend>03. Versuch</legend>
-                    <Guesses />
-                </fieldset>
 
-                <fieldset className={"guessBox"}>
-                    <legend>02. Versuch</legend>
-                    <Guesses />
-                </fieldset>
-
-                <fieldset className={"guessBox"}>
-                    <legend>01. Versuch</legend>
-                    <Guesses />
-                </fieldset>
-            </div>
 
             <div className={'navigationBar'}>
                 <button onClick={() => {localStorage.setItem("token", "");
                     navigate("/login")}}>Abmelden</button>
 
-                <button>Neues Spiel</button>
-                <button>Konto löschen</button>
-                <button>Spielregeln</button>
-            </div>
 
+                <button>Konto löschen</button>
+                <button onClick={AboutGame}>Spielregeln</button>
+                <button onClick={() => startGame()}>Neues Spiel</button>
+                <button onClick={checkGuess}>prüfen</button>
+            </div>
         </div>
     )
 }
