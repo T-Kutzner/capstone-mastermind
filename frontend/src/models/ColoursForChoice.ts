@@ -6,5 +6,6 @@ export const ColoursForChoice:{[key: string]: any} = {
     'YELLOW': '#FFD966',
     'PURPLE': '#9900FF',
     'GREY': '#777777',
-    'MINT': '#76A5AF'
+    'MINT': '#76A5AF',
+    'STANDARD': '#868EBA'
 }

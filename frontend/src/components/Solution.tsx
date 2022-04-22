@@ -11,10 +11,10 @@ export const Solution = (props: SolutionBoxProps) => {
 
     return (
         <div className={'solutionColourButtons'}>
-            <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[props.solution.colours[0]]}}></button>
-            <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[props.solution.colours[1]]}}></button>
-            <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[props.solution.colours[2]]}}></button>
-            <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[props.solution.colours[3]]}}></button>
+            <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[props.solution.colours[0]]}} />
+            <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[props.solution.colours[1]]}} />
+            <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[props.solution.colours[2]]}} />
+            <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[props.solution.colours[3]]}} />
         </div>
     )
 }

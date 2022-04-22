@@ -1,10 +1,7 @@
 package de.tk.mastermind.models;
 
-import lombok.AllArgsConstructor;
-
-@AllArgsConstructor
 public enum Colour {
-    RED("#741B47"),
+  /*  RED("#741B47"),
     PETROL("#134F5C"),
     ORANGE("#E69138"),
     GREEN("#4da63c"),
@@ -13,5 +10,13 @@ public enum Colour {
     GREY("#777777"),
     MINT("#76A5AF");
 
-    String colourCode;
+   */
+    RED,
+    PETROL,
+    ORANGE,
+    GREEN,
+    YELLOW,
+    PURPLE,
+    GREY,
+    MINT
 }

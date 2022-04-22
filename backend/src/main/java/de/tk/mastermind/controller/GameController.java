@@ -16,8 +16,7 @@ public class GameController {
     private final GameService gameService;
 
     @PostMapping
-    public Game createGame()
-    {
+    public Game createGame() {
         return gameService.createGame();
     }
 
