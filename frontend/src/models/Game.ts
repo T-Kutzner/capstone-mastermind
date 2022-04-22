@@ -1,8 +1,7 @@
 export default interface Game {
     id: string;
     solution: Guess,
-    guesses: Array<Guess>,
-    hints: Array<Guess>
+    guesses: Array<Guess>
 }
 
 export interface Guess {
