@@ -61,7 +61,7 @@ export default function GamePage(){
 
 
 
-/*Lösung im Standard hide, erst nach letztem Versuch oder gewonnen anzeigen */
+
             {game.id &&
                 <div>
                     <fieldset className={'boxes'}>
