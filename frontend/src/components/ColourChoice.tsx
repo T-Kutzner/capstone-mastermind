@@ -1,21 +1,22 @@
 import { ColoursForChoice } from '../models/ColoursForChoice'
 import "./ColourChoice.css"
 
-export const ColourChoice = () => {
+export interface ColourChoiceProps{
+    clickHandler: (colour: string) => void
+}
 
+export const ColourChoice = (props: ColourChoiceProps) => {
 
-    let colourIndex : number[] = [0, 1, 2, 3, 4, 5]
-
-    function inProgress(){}
+    let colourIndex : string[] = ['RED', 'PETROL', 'ORANGE', 'GREEN', 'YELLOW', 'PURPLE']
 
     return (
         <div className={'colourChoiceButtons'}>
-            <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[0]]}} onClick={inProgress}></button>
-            <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[1]]}} onClick={inProgress}></button>
-            <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[2]]}} onClick={inProgress}></button>
-            <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[3]]}} onClick={inProgress}></button>
-            <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[4]]}} onClick={inProgress}></button>
-            <button className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[5]]}} onClick={inProgress}></button>
+            <button onClick={() => props.clickHandler(colourIndex[0])} className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[0]]}} />
+            <button onClick={() => props.clickHandler(colourIndex[1])} className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[1]]}} />
+            <button onClick={() => props.clickHandler(colourIndex[2])} className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[2]]}} />
+            <button onClick={() => props.clickHandler(colourIndex[3])} className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[3]]}} />
+            <button onClick={() => props.clickHandler(colourIndex[4])} className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[4]]}} />
+            <button onClick={() => props.clickHandler(colourIndex[5])} className={'gameButtons'} style={{ backgroundColor: ColoursForChoice[colourIndex[5]]}} />
         </div>
     )
 }

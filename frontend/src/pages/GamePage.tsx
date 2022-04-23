@@ -1,106 +1,115 @@
 import {useNavigate} from "react-router-dom";
 import {ColourChoice} from "../components/ColourChoice";
-import {SolutionColours} from "../components/SolutionColours"
-import {Guesses} from "../components/Guesses";
+import {Solution} from "../components/Solution"
+import {GuessBox} from "../components/GuessBox";
 import "./GamePage.css"
+import {HintBox} from "../components/HintBox";
+import {AboutGame} from "../components/AboutGame";
+import {useState} from "react";
+import Game, {Colour, Guess} from "../models/Game";
+import {GuessedBox} from "../components/GuessedBox";
 
 
 export default function GamePage(){
 
+    const standardColour = {colours: [Colour.STANDARD, Colour.STANDARD, Colour.STANDARD, Colour.STANDARD]}
     const navigate = useNavigate()
+
+    const [game, setGame] = useState({} as Game);
+    const [guess, setGuess] = useState(standardColour);
+    const [passedGuesses, setPassedGuesses] = useState([] as Array<Guess>);
+    const [colour, setColour] = useState("");
+
+
+    const startGame = () => {
+        fetch(`${process.env.REACT_APP_BASE_URL}/api/game`, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token') ?? 'no-token'}`
+            }
+        })
+            .then(response => response.json())
+            .then((game: Game) => setGame(game));
+    };
+
+    const checkGuess = () => {
+        if (!guess.colours.includes(Colour.STANDARD)) {
+        fetch(`${process.env.REACT_APP_BASE_URL}/api/game/${game.id}/guesses`, {
+            method: 'POST',
+            headers: {
+                Authorization: `Bearer ${localStorage.getItem('token') ?? 'no-token'}`,
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(guess)
+        })
+            .then(response => response.json())
+            .then((responseBody: Game) => setPassedGuesses(responseBody.guesses.reverse()))
+            .then(() => setGuess(standardColour))
+    }};
+
 
 
     return(
         <div className={'gamePage'}>
 
-
-
-
-
             <div>
                 <fieldset className={'choiceBox'}>
                     <legend>Farbauswahl</legend>
-                    <ColourChoice />
+                    <ColourChoice clickHandler={setColour}/>
                 </fieldset>
             </div>
 
-            <div>
-                <fieldset className={'boxes'}>
-                    <legend>Lösung</legend>
-                    <SolutionColours />
-                </fieldset>
 
 
-                <fieldset className={'guessBox'}>
-                    <legend>12. Versuch</legend>
-                    <Guesses />
-                </fieldset>
 
-                <fieldset className={"guessBox"}>
-                    <legend>11. Versuch</legend>
-                    <Guesses />
-                </fieldset>
+            {game.id &&
+                <div>
+                    <fieldset className={'boxes'}>
+                        <legend>Lösung</legend>
+                        <Solution solution={game.solution} />
+                    </fieldset>
 
-                <fieldset className={"guessBox"}>
-                    <legend>10. Versuch</legend>
-                    <Guesses />
-                </fieldset>
+                    <div className={'answer'}>
+                        <fieldset className={"guessBox"}>
+                            <legend>aktueller Versuch</legend>
+                            <GuessBox colour={colour} guess={guess} clickHandler={setGuess} />
+                        </fieldset>
+                        <fieldset className={"hintBox"}>
+                            <HintBox />
+                        </fieldset>
+                        <button className={'checkButton'} onClick={checkGuess}>prüfen</button>
+                    </div>
 
-                <fieldset className={"guessBox"}>
-                    <legend>09. Versuch</legend>
-                    <Guesses />
-                </fieldset>
+                    {
+                        passedGuesses
+                            .map((elem, index)=> <div className={'answer'}>
+                                <fieldset className={"guessBox"}>
+                                    <legend>{passedGuesses.length - index}. Versuch</legend>
+                                    <GuessedBox guess={elem}/>
+                                </fieldset>
+                                <fieldset className={"hintBox"}>
+                                    <HintBox />
+                                </fieldset>
+                            </div>)
+                    }
 
-                <fieldset className={"guessBox"}>
-                    <legend>08. Versuch</legend>
-                    <Guesses />
-                </fieldset>
 
-                <fieldset className={"guessBox"}>
-                    <legend>07. Versuch</legend>
-                    <Guesses />
-                </fieldset>
+                </div>
+            }
 
-                <fieldset className={"guessBox"}>
-                    <legend>06. Versuch</legend>
-                    <Guesses />
-                </fieldset>
 
-                <fieldset className={"guessBox"}>
-                    <legend>05. Versuch</legend>
-                    <Guesses />
-                </fieldset>
 
-                <fieldset className={"guessBox"}>
-                    <legend>04. Versuch</legend>
-                    <Guesses />
-                </fieldset>
-
-                <fieldset className={"guessBox"}>
-                    <legend>03. Versuch</legend>
-                    <Guesses />
-                </fieldset>
-
-                <fieldset className={"guessBox"}>
-                    <legend>02. Versuch</legend>
-                    <Guesses />
-                </fieldset>
-
-                <fieldset className={"guessBox"}>
-                    <legend>01. Versuch</legend>
-                    <Guesses />
-                </fieldset>
-            </div>
 
             <div className={'navigationBar'}>
                 <button onClick={() => {localStorage.setItem("token", "");
                     navigate("/login")}}>Abmelden</button>
 
-                <button>Neues Spiel</button>
-                <button>Konto löschen</button>
-                <button>Spielregeln</button>
-            </div>
 
+                <button>Konto löschen</button>
+                <button onClick={AboutGame}>Spielregeln</button>
+                <button onClick={() => startGame()}>Neues Spiel</button>
+
+            </div>
         </div>
     )
 }
