@@ -1,13 +1,12 @@
 package de.tk.mastermind.service;
 
-import de.tk.mastermind.models.Colour;
-import de.tk.mastermind.models.Game;
-import de.tk.mastermind.models.Guess;
+import de.tk.mastermind.models.*;
 import de.tk.mastermind.repositories.GameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -52,14 +51,42 @@ public class GameService {
         Optional<Game> newGame = gameRepository.findById(id);
         if (newGame.isPresent()) {
             Game game = newGame.get();
-
+            Hint hint = matchOfGuessSolution(guess, game);
+            List<Hint> hintList = game.getHints();
+            hintList.add(hint);
             List<Guess> guessList = game.getGuesses();
             guessList.add(guess);
-
             return Optional.of(gameRepository.save(game));
         }
         return Optional.empty();
     }
 
+
+    public Hint matchOfGuessSolution(Guess guess, Game game) {
+
+        ColourBW[] hint = new ColourBW[4];
+
+        for(int i = 0; i < 4; i++) {
+
+            if(Arrays.asList(game.getSolution().getColours()).contains(guess.getColours()[i])) {
+
+                if(game.getSolution().getColours()[i] == guess.getColours()[i]){
+
+                    hint[i] = ColourBW.BLACK;
+                }
+                else hint[i] = ColourBW.WHITE;
+            }
+        }
+        return new Hint(hint);
+    }
+
+
+
+
+// dann noch prüfen ob alle guesses schwarz sind
+// wenn ja, gewonnen (Solution einblenden und yay, gewonnen)
+// wenn nein, Zähler für Versuch überprüfen ob schon auf max Versuche
+// wenn max dann verloren und Solution einblenden
+// wenn noch nicht max Versuche dann nächsten Versuch freigeben, Zähler für Versuch hochzählen(?)
 
 }

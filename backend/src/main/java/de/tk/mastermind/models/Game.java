@@ -15,6 +15,7 @@ public class Game {
     private String id;
     private List<Guess> guesses = new ArrayList<>();
     private Guess solution;
+    private List<Hint> hints = new ArrayList<>();
 
     public boolean isRunning() {
         return guesses.size() < 12;

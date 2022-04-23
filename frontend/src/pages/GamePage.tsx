@@ -61,7 +61,7 @@ export default function GamePage(){
 
 
 
-/*Lösung im Standard hide, erst nach letztem Versuch oder gewonnen anzeigen */
+
             {game.id &&
                 <div>
                     <fieldset className={'boxes'}>
@@ -82,18 +82,19 @@ export default function GamePage(){
 
                     {
                         passedGuesses
-                            .map((elem, index)=> <div className={'answer'}>
-                                <fieldset className={"guessBox"}>
-                                    <legend>{passedGuesses.length - index}. Versuch</legend>
-                                    <GuessedBox guess={elem}/>
-                                </fieldset>
-                                <fieldset className={"hintBox"}>
-                                    <HintBox />
-                                </fieldset>
-                            </div>)
+                            .map((elem, index) =>
+
+                                <div className={'answer'}>
+                                    <fieldset className={"guessBox"}>
+                                        <legend>{passedGuesses.length - index}. Versuch</legend>
+                                              <GuessedBox guess={elem}/>
+                                    </fieldset>
+                                    <fieldset className={"hintBox"}>
+                                        <HintBox />
+                                    </fieldset>
+                                </div>
+                            )
                     }
-
-
                 </div>
             }
 
@@ -108,8 +109,8 @@ export default function GamePage(){
                 <button>Konto löschen</button>
                 <button onClick={AboutGame}>Spielregeln</button>
                 <button onClick={() => startGame()}>Neues Spiel</button>
-
             </div>
+
         </div>
     )
 }
