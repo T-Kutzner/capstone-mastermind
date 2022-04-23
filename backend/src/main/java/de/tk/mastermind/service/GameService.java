@@ -50,34 +50,46 @@ public class GameService {
 
         Optional<Game> newGame = gameRepository.findById(id);
         if (newGame.isPresent()) {
-            Game game = newGame.get();
-            Hint hint = matchOfGuessSolution(guess, game);
-            List<Hint> hintList = game.getHints();
-            hintList.add(hint);
-            List<Guess> guessList = game.getGuesses();
-            guessList.add(guess);
+
+            Game game = matchOfGuessSolution(guess, newGame.get());
             return Optional.of(gameRepository.save(game));
         }
         return Optional.empty();
     }
 
 
-    public Hint matchOfGuessSolution(Guess guess, Game game) {
+    public Game matchOfGuessSolution(Guess guess, Game game) {
 
         ColourBW[] hint = new ColourBW[4];
+        int countHits = 0;
+        int maxTries = 9;
 
-        for(int i = 0; i < 4; i++) {
+        for(int i = 0; i < hint.length; i++) {
 
-            if(Arrays.asList(game.getSolution().getColours()).contains(guess.getColours()[i])) {
+            if (Arrays.asList(game.getSolution().getColours()).contains(guess.getColours()[i])) {
 
-                if(game.getSolution().getColours()[i] == guess.getColours()[i]){
+                if (game.getSolution().getColours()[i] == guess.getColours()[i]) {
 
                     hint[i] = ColourBW.BLACK;
+                    countHits++;
                 }
                 else hint[i] = ColourBW.WHITE;
             }
+            else hint[i] = ColourBW.STANDARD;
         }
-        return new Hint(hint);
+
+        if(countHits == 4) {
+            game.setWon(true);
+        }
+
+        if(game.getGuesses().size() == maxTries) {
+            game.setGameOver(true);
+        }
+        List<Hint> hintList = game.getHints();
+        hintList.add(new Hint(hint));
+        List<Guess> guessList = game.getGuesses();
+        guessList.add(guess);
+        return game;
     }
 
 

@@ -16,12 +16,6 @@ public class Game {
     private List<Guess> guesses = new ArrayList<>();
     private Guess solution;
     private List<Hint> hints = new ArrayList<>();
-
-    public boolean isRunning() {
-        return guesses.size() < 12;
-    }
-
-    public boolean isWon() {
-        return !guesses.isEmpty() && guesses.get(guesses.size() - 1).equals(solution);
-    }
+    private boolean isWon = false;
+    private boolean gameOver = false;
 }
