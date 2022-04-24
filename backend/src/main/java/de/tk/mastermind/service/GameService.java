@@ -5,8 +5,6 @@ import de.tk.mastermind.repositories.GameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-
-import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -63,25 +61,26 @@ public class GameService {
         ColourBW[] hint = new ColourBW[4];
         int countHits = 0;
         int maxTries = 6;
+        Colour[] temp = new Colour[]{game.getSolution().getColours()[0], game.getSolution().getColours()[1], game.getSolution().getColours()[2], game.getSolution().getColours()[3]};
 
         for(int i = 0; i < hint.length; i++) {
 
-            if (Arrays.asList(game.getSolution().getColours()).contains(guess.getColours()[i])) {
-
-                if (game.getSolution().getColours()[i] == guess.getColours()[i]) {
-
-                    hint[i] = ColourBW.BLACK;
-                    countHits++;
-                }
-
-
-                else hint[i] = ColourBW.WHITE;
-
-
-
-
+            if (game.getSolution().getColours()[i] == guess.getColours()[i]) {
+                hint[i] = ColourBW.BLACK;
+                temp[i] = Colour.STANDARD;
+                countHits++;
+                continue;
             }
-            else hint[i] = ColourBW.STANDARD;
+
+            for(int j = 0; j < hint.length; j++) {
+
+                if (temp[j] == guess.getColours()[i]) {
+                    if(i != j) {
+                        hint[i] = ColourBW.WHITE;
+                        temp[j] = Colour.STANDARD;
+                    }
+                }
+            }
         }
 
         if(countHits == 4) {

@@ -8,5 +8,6 @@ public enum Colour {
     YELLOW,
     PURPLE,
     GREY,
-    MINT
+    MINT,
+    STANDARD
 }

@@ -66,8 +66,8 @@ export default function GamePage() {
         
             {game.id &&
                 <div>
-                    {game.gameWon && <div>Super, gewonnen</div>}
-                    {game.gameOver && <div>Verloren :(</div>}
+                    {game.gameWon && <div> - ∞ &#129395; - - - Gewonnen - - - &#129395; ∞ - </div>}
+                    {game.gameOver && <div>- &#128542; Verloren, gleich nochmal &#129299; -</div>}
 
                     {
                         (game.gameWon || game.gameOver)
@@ -79,7 +79,7 @@ export default function GamePage() {
                             :
                             <fieldset className={'boxes'}>
                                 <legend>Lösung</legend>
-                                <Solution solution={game.solution}/>
+                                <Solution solution={standardColour}/>
                             </fieldset>
 
                     }
