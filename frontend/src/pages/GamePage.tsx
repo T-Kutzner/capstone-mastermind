@@ -63,7 +63,7 @@ export default function GamePage() {
                 </fieldset>
             </div>
 
-
+        
             {game.id &&
                 <div>
                     {game.gameWon && <div>Super, gewonnen</div>}
