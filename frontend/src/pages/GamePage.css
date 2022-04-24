@@ -35,6 +35,10 @@
     border: black inset 2px;
     font-size: 16px;
 }
+.passedGuesses-wrapper {
+    display: flex;
+    flex-direction: column-reverse;
+}
 
 .hintBox{
     display: flex;
@@ -43,6 +47,14 @@
     height: 38px;
     border: black inset 2px;
     margin-top: 13px;
+}
+.hints-wrapper {
+    display: flex;
+    flex-direction: column-reverse;
+    gap: 3px;
+}
+.guess-hint-wrapper {
+    display: flex;
 }
 
 .answer{

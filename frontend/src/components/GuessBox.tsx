@@ -3,7 +3,7 @@ import "./GuessBox.css"
 import {getColour, Guess} from "../models/Game";
 
 
-export interface GuessBoxProps {
+interface GuessBoxProps {
     guess: Guess
     clickHandler: (changedGuess: Guess) => void
     colour: string

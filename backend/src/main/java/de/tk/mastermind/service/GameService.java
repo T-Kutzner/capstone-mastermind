@@ -62,7 +62,7 @@ public class GameService {
 
         ColourBW[] hint = new ColourBW[4];
         int countHits = 0;
-        int maxTries = 9;
+        int maxTries = 6;
 
         for(int i = 0; i < hint.length; i++) {
 
@@ -79,16 +79,18 @@ public class GameService {
         }
 
         if(countHits == 4) {
-            game.setWon(true);
+            game.setGameWon(true);
         }
 
-        if(game.getGuesses().size() == maxTries) {
-            game.setGameOver(true);
-        }
         List<Hint> hintList = game.getHints();
         hintList.add(new Hint(hint));
         List<Guess> guessList = game.getGuesses();
         guessList.add(guess);
+
+        if(game.getGuesses().size() == maxTries) {
+            game.setGameOver(true);
+        }
+
         return game;
     }
 

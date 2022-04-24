@@ -16,6 +16,6 @@ public class Game {
     private List<Guess> guesses = new ArrayList<>();
     private Guess solution;
     private List<Hint> hints = new ArrayList<>();
-    private boolean isWon = false;
+    private boolean gameWon = false;
     private boolean gameOver = false;
 }
