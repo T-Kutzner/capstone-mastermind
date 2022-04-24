@@ -73,7 +73,13 @@ public class GameService {
                     hint[i] = ColourBW.BLACK;
                     countHits++;
                 }
+
+
                 else hint[i] = ColourBW.WHITE;
+
+
+
+
             }
             else hint[i] = ColourBW.STANDARD;
         }
@@ -93,14 +99,4 @@ public class GameService {
 
         return game;
     }
-
-
-
-
-// dann noch prüfen ob alle guesses schwarz sind
-// wenn ja, gewonnen (Solution einblenden und yay, gewonnen)
-// wenn nein, Zähler für Versuch überprüfen ob schon auf max Versuche
-// wenn max dann verloren und Solution einblenden
-// wenn noch nicht max Versuche dann nächsten Versuch freigeben, Zähler für Versuch hochzählen(?)
-
 }

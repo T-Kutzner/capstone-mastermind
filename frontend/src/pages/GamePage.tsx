@@ -79,7 +79,7 @@ export default function GamePage() {
                             :
                             <fieldset className={'boxes'}>
                                 <legend>Lösung</legend>
-                                <Solution solution={standardColour}/>
+                                <Solution solution={game.solution}/>
                             </fieldset>
 
                     }
