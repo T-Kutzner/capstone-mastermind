@@ -5,6 +5,7 @@ import de.tk.mastermind.repositories.GameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.Optional;
 
@@ -65,23 +66,27 @@ public class GameService {
 
         for(int i = 0; i < hint.length; i++) {
 
-            if (game.getSolution().getColours()[i] == guess.getColours()[i]) {
+            if (temp[i].equals(guess.getColours()[i])) {
                 hint[i] = ColourBW.BLACK;
                 temp[i] = Colour.STANDARD;
                 countHits++;
-                continue;
             }
+        }
 
-            for(int j = 0; j < hint.length; j++) {
+        for(int i = 0; i < hint.length; i++) {
 
-                if (temp[j] == guess.getColours()[i]) {
-                    if(i != j) {
-                        hint[i] = ColourBW.WHITE;
-                        temp[j] = Colour.STANDARD;
+            if (Arrays.asList(temp).contains(guess.getColours()[i])) {
+                for (int j = 0; j < hint.length; j++) {
+                    if(temp[j].equals(guess.getColours()[i])) {
+                       temp[j] = Colour.STANDARD;
                     }
+                }
+                if(hint[i] == null) {
+                hint[i] = ColourBW.WHITE;
                 }
             }
         }
+
 
         if(countHits == 4) {
             game.setGameWon(true);
