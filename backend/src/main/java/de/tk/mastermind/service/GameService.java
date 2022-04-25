@@ -1,12 +1,9 @@
 package de.tk.mastermind.service;
 
-import de.tk.mastermind.models.Colour;
-import de.tk.mastermind.models.Game;
-import de.tk.mastermind.models.Guess;
+import de.tk.mastermind.models.*;
 import de.tk.mastermind.repositories.GameRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
-
 
 import java.util.List;
 import java.util.Optional;
@@ -51,15 +48,54 @@ public class GameService {
 
         Optional<Game> newGame = gameRepository.findById(id);
         if (newGame.isPresent()) {
-            Game game = newGame.get();
 
-            List<Guess> guessList = game.getGuesses();
-            guessList.add(guess);
-
+            Game game = matchOfGuessSolution(guess, newGame.get());
             return Optional.of(gameRepository.save(game));
         }
         return Optional.empty();
     }
 
 
+    public Game matchOfGuessSolution(Guess guess, Game game) {
+
+        ColourBW[] hint = new ColourBW[4];
+        int countHits = 0;
+        int maxTries = 6;
+        Colour[] temp = new Colour[]{game.getSolution().getColours()[0], game.getSolution().getColours()[1], game.getSolution().getColours()[2], game.getSolution().getColours()[3]};
+
+        for(int i = 0; i < hint.length; i++) {
+
+            if (game.getSolution().getColours()[i] == guess.getColours()[i]) {
+                hint[i] = ColourBW.BLACK;
+                temp[i] = Colour.STANDARD;
+                countHits++;
+                continue;
+            }
+
+            for(int j = 0; j < hint.length; j++) {
+
+                if (temp[j] == guess.getColours()[i]) {
+                    if(i != j) {
+                        hint[i] = ColourBW.WHITE;
+                        temp[j] = Colour.STANDARD;
+                    }
+                }
+            }
+        }
+
+        if(countHits == 4) {
+            game.setGameWon(true);
+        }
+
+        List<Hint> hintList = game.getHints();
+        hintList.add(new Hint(hint));
+        List<Guess> guessList = game.getGuesses();
+        guessList.add(guess);
+
+        if(game.getGuesses().size() == maxTries) {
+            game.setGameOver(true);
+        }
+
+        return game;
+    }
 }

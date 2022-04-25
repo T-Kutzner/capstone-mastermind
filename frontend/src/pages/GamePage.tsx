@@ -6,18 +6,17 @@ import "./GamePage.css"
 import {HintBox} from "../components/HintBox";
 import {AboutGame} from "../components/AboutGame";
 import {useState} from "react";
-import Game, {Colour, Guess} from "../models/Game";
+import Game, {Colour} from "../models/Game";
 import {GuessedBox} from "../components/GuessedBox";
 
 
-export default function GamePage(){
+export default function GamePage() {
 
     const standardColour = {colours: [Colour.STANDARD, Colour.STANDARD, Colour.STANDARD, Colour.STANDARD]}
     const navigate = useNavigate()
 
     const [game, setGame] = useState({} as Game);
     const [guess, setGuess] = useState(standardColour);
-    const [passedGuesses, setPassedGuesses] = useState([] as Array<Guess>);
     const [colour, setColour] = useState("");
 
 
@@ -34,22 +33,27 @@ export default function GamePage(){
 
     const checkGuess = () => {
         if (!guess.colours.includes(Colour.STANDARD)) {
-        fetch(`${process.env.REACT_APP_BASE_URL}/api/game/${game.id}/guesses`, {
-            method: 'POST',
-            headers: {
-                Authorization: `Bearer ${localStorage.getItem('token') ?? 'no-token'}`,
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify(guess)
-        })
-            .then(response => response.json())
-            .then((responseBody: Game) => setPassedGuesses(responseBody.guesses.reverse()))
-            .then(() => setGuess(standardColour))
-    }};
+            fetch(`${process.env.REACT_APP_BASE_URL}/api/game/${game.id}/guesses`, {
+                method: 'POST',
+                headers: {
+                    Authorization: `Bearer ${localStorage.getItem('token') ?? 'no-token'}`,
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(guess)
+            })
+                .then(response => response.json())
+                .then((responseBody: Game) => {
+                    setGame(responseBody);
+                })
+                .then(() => {
+                    setGuess(standardColour)
+                })
+
+        }
+    };
 
 
-
-    return(
+    return (
         <div className={'gamePage'}>
 
             <div>
@@ -59,57 +63,82 @@ export default function GamePage(){
                 </fieldset>
             </div>
 
-
-
-
+        
             {game.id &&
                 <div>
-                    <fieldset className={'boxes'}>
-                        <legend>Lösung</legend>
-                        <Solution solution={game.solution} />
-                    </fieldset>
-
-                    <div className={'answer'}>
-                        <fieldset className={"guessBox"}>
-                            <legend>aktueller Versuch</legend>
-                            <GuessBox colour={colour} guess={guess} clickHandler={setGuess} />
-                        </fieldset>
-                        <fieldset className={"hintBox"}>
-                            <HintBox />
-                        </fieldset>
-                        <button className={'checkButton'} onClick={checkGuess}>prüfen</button>
-                    </div>
+                    {game.gameWon && <div> - ∞ &#129395; - - - Gewonnen - - - &#129395; ∞ - </div>}
+                    {game.gameOver && <div>- &#128542; Verloren, gleich nochmal &#129299; -</div>}
 
                     {
-                        passedGuesses
-                            .map((elem, index)=> <div className={'answer'}>
-                                <fieldset className={"guessBox"}>
-                                    <legend>{passedGuesses.length - index}. Versuch</legend>
-                                    <GuessedBox guess={elem}/>
-                                </fieldset>
-                                <fieldset className={"hintBox"}>
-                                    <HintBox />
-                                </fieldset>
-                            </div>)
+                        (game.gameWon || game.gameOver)
+                            ?
+                            <fieldset className={'boxes'}>
+                                <legend>Lösung</legend>
+                                <Solution solution={game.solution}/>
+                            </fieldset>
+                            :
+                            <fieldset className={'boxes'}>
+                                <legend>Lösung</legend>
+                                <Solution solution={standardColour}/>
+                            </fieldset>
+
                     }
 
+                    {!(game.gameWon || game.gameOver) &&
+                        <div className={'answer'}>
+                            <fieldset className={"guessBox"}>
+                                <legend>aktueller Versuch</legend>
+                                <GuessBox colour={colour} guess={guess} clickHandler={setGuess}/>
+                            </fieldset>
 
+                            <button className={'checkButton'} onClick={checkGuess}>prüfen</button>
+                        </div>
+                    }
+                    <div className='guess-hint-wrapper'>
+                        <div className='passedGuesses-wrapper'>
+                    {
+                        game.guesses
+                            .map((currentGuess, index) =>
+
+                                <div className={'answer'} key={'guess' + index}>
+                                    <fieldset className={"guessBox"}>
+                                        <legend>{index+1}. Versuch</legend>
+                                        <GuessedBox guess={currentGuess}/>
+                                    </fieldset>
+                                </div>
+                            )
+                    }
+                        </div>
+                        <div className='hints-wrapper'>
+                    {
+                        game.hints
+                            .map((currentHint, index) =>
+                                <div className={'answer'} key={'hint' + index}>
+                                    <fieldset className={"hintBox"}>
+                                        <HintBox hint={currentHint}/>
+                                    </fieldset>
+                                </div>
+                            )
+                    }
+                        </div>
+                    </div>
                 </div>
             }
 
 
-
-
             <div className={'navigationBar'}>
-                <button onClick={() => {localStorage.setItem("token", "");
-                    navigate("/login")}}>Abmelden</button>
+                <button onClick={() => {
+                    localStorage.setItem("token", "");
+                    navigate("/login")
+                }}>Abmelden
+                </button>
 
 
                 <button>Konto löschen</button>
                 <button onClick={AboutGame}>Spielregeln</button>
                 <button onClick={() => startGame()}>Neues Spiel</button>
-
             </div>
+
         </div>
     )
 }

@@ -1,11 +1,24 @@
 export default interface Game {
     id: string;
     solution: Guess,
-    guesses: Array<Guess>
+    guesses: Array<Guess>,
+    hints: Array<Hint>,
+    gameWon: boolean,
+    gameOver: boolean
 }
 
 export interface Guess {
     colours: Array<Colour>
+}
+
+export interface Hint{
+    coloursBW: Array<ColourBW>
+}
+
+export enum ColourBW{
+    BLACK = "BLACK",
+    WHITE = "WHITE",
+    STANDARD = "STANDARD"
 }
 
 export enum Colour {
