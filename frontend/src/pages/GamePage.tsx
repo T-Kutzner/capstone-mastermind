@@ -8,7 +8,7 @@ import {AboutGame} from "../components/AboutGame";
 import {useState} from "react";
 import Game, {Colour} from "../models/Game";
 import {GuessedBox} from "../components/GuessedBox";
-
+import welcomePage from "../images/welcomePage.png";
 
 export default function GamePage() {
 
@@ -54,7 +54,11 @@ export default function GamePage() {
 
 
     return (
+
         <div className={'gamePage'}>
+            <div className={'picture'} >
+                <img src={welcomePage} alt={'WelcomePageImage'} width="250" />
+            </div>
 
             <div>
                 <fieldset className={'choiceBox'}>
@@ -83,6 +87,8 @@ export default function GamePage() {
                             </fieldset>
 
                     }
+
+                    <hr />
 
                     {!(game.gameWon || game.gameOver) &&
                         <div className={'answer'}>

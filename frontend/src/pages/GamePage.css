@@ -17,61 +17,78 @@
     border: black inset 2px;
     width: 50px;
     font-size: 16px;
-    margin-top: 150px;
+    margin-top: 128px;
+    margin-right: -15px;
 }
 
 .boxes{
-    display: flex;
-    justify-content: center;
+    width: 25px;
+    height: 56px;
+    border: black inset 2px;
+    font-size: 16px;
+    margin-top: 10px;
+    margin-bottom: 28px;
+}
+
+.guessBox{
+    margin-bottom: 10px;
     width: 25px;
     height: 56px;
     border: black inset 2px;
     font-size: 16px;
 }
 
-.guessBox{
-    width: 25px;
-    height: 56px;
-    border: black inset 2px;
-    font-size: 16px;
+.picture{
+    position: relative;
+    left: 100px;
+    z-index: -1;
 }
+
+hr{
+    width: 244px;
+    border-width: 2px;
+    margin-left: 2px;
+    color: #000000;
+}
+
 .passedGuesses-wrapper {
     display: flex;
     flex-direction: column-reverse;
 }
 
 .hintBox{
-    display: flex;
-    justify-content: center;
-    width: 40px;
-    height: 38px;
+    align-items: center;
+    width: 25px;
+    height: 39px;
     border: black inset 2px;
-    margin-top: 13px;
+    margin-bottom: 8px;
+    margin-left: 30px;
+    padding-top: 12px;
 }
+
 .hints-wrapper {
     display: flex;
     flex-direction: column-reverse;
-    gap: 3px;
+    gap: 12px;
 }
+
 .guess-hint-wrapper {
     display: flex;
 }
 
 .answer{
     display: flex;
-    flex-direction: row;
-    column-gap: 15px;
+    align-items: center;
+    gap: 12px;
 }
 
 .checkButton{
-    display: flex;
-    justify-items: center;
-    width: 55px;
-    height: 28px;
     border: black inset 2px;
     border-radius: 12%;
-    margin-top: 30px;
-    background-color: #440044;
-    font-size: 13px;
+    background-color: rgba(220, 145, 42, 0.6);
     color: white;
+    font-size: 0.8em;
+    padding: 8px;
+    margin-top: 9px;
+    margin-left: 22px;
 }

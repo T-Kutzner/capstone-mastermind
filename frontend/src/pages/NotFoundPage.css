@@ -11,13 +11,9 @@
 }
 
 .page404{
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
+    text-align: center;
     width: 40rem;
     margin: auto;
-    gap: 12px;
-    align-items: center;
     font-family: "Comic Sans MS";
     font-size: xxx-large;
     font-weight: bold;
@@ -27,8 +23,6 @@
     text-decoration: none;
     color: white;
     font-size: medium;
-    display: flex;
-    justify-content: center;
     border-style: solid;
     border-radius: 20px;
     border-color: rgba(87, 5, 20, 0.85);
@@ -36,4 +30,17 @@
     margin: 30px;
     padding-left: 20px;
     padding-right: 20px;
+}
+
+.text{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.pressStart{
+    text-align: center;
+}
+.verlaufen{
+    text-align: center;
 }
