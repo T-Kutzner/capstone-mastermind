@@ -68,21 +68,20 @@ public class GameService {
 
             if (temp[i].equals(guess.getColours()[i])) {
                 hint[i] = ColourBW.BLACK;
-                temp[i] = Colour.STANDARD;
                 countHits++;
             }
         }
 
         for(int i = 0; i < hint.length; i++) {
 
-            if (Arrays.asList(temp).contains(guess.getColours()[i])) {
+            if ((Arrays.asList(temp).contains(guess.getColours()[i])) && (hint[i] != ColourBW.BLACK)) {
+
                 for (int j = 0; j < hint.length; j++) {
-                    if(temp[j].equals(guess.getColours()[i])) {
-                       temp[j] = Colour.STANDARD;
+
+                    if (temp[j].equals(guess.getColours()[i])) {
+                        temp[j] = Colour.STANDARD;
+                        hint[i] = ColourBW.WHITE;
                     }
-                }
-                if(hint[i] == null) {
-                hint[i] = ColourBW.WHITE;
                 }
             }
         }
