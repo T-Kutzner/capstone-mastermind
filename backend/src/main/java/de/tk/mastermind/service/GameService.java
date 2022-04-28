@@ -92,14 +92,15 @@ public class GameService {
             game.setGameWon(true);
         }
 
+        if((game.getGuesses().size() + 1 == maxTries) && !game.isGameWon()){
+            game.setGameOver(true);
+        }
+
+
         List<Hint> hintList = game.getHints();
         hintList.add(new Hint(hint));
         List<Guess> guessList = game.getGuesses();
         guessList.add(guess);
-
-        if(game.getGuesses().size() == maxTries) {
-            game.setGameOver(true);
-        }
 
         return game;
     }
