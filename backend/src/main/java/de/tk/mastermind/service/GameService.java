@@ -57,7 +57,7 @@ public class GameService {
     }
 
 
-    public Game matchOfGuessSolution(Guess guess, Game game) {
+    private Game matchOfGuessSolution(Guess guess, Game game) {
 
         ColourBW[] hint = new ColourBW[4];
         int countHits = 0;
