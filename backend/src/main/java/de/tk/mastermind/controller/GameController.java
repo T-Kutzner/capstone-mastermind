@@ -24,23 +24,4 @@ public class GameController {
     public ResponseEntity<Game> createGuess(@PathVariable String id, @RequestBody Guess guess){
         return ResponseEntity.of(gameService.createGuess(id, guess));
     }
-
-
-
-/*
-    @GetMapping("/{id}")
-    public ResponseEntity<Player> findById(@PathVariable String id) {
-        return ResponseEntity.of(playerService.findPlayerById(id));
-    }
-
-    @DeleteMapping("/{id}")
-    public Player deletePlayerById(@PathVariable String id) {
-        return playerService.deletePlayerById(id);
-    }
-
-    @GetMapping
-    public String greet(Principal principal) {
-        return "Hallo " + principal.getName() + "!";
-    }
- */
 }
