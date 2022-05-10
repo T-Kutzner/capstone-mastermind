@@ -68,6 +68,7 @@ public class GameService {
 
             if (temp[i].equals(guess.getColours()[i])) {
                 hint[i] = ColourBW.BLACK;
+                temp[i] = Colour.STANDARD;
                 countHits++;
             }
         }
